@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<my-search @mysearch='gotoSearch'></my-search>
 		<view class="scroll-view-container">
 			<!-- 左侧滚动视图区域 -->
 			<scroll-view class="left-scroll-view" scroll-y :style="{height: wh +'px'}">
@@ -40,13 +41,13 @@
 		},
 		onLoad() {
 			const sysInfo = uni.getSystemInfoSync()
-			this.wh = sysInfo.windowHeight
+			this.wh = sysInfo.windowHeight - 50
 			this.getCateList()
 		},
 		methods:{
 			async getCateList(){
 				const {data:res} = await uni.$http.get('/api/public/v1/categories')
-				console.log(res)
+				// console.log(res)
 				if(res.meta.status !== 200) return uni.$showMsg()
 				this.cateList = res.message
 				// 为二级分类赋值
@@ -62,6 +63,12 @@
 			gotoGoodsList(item3){
 				uni.navigateTo({
 					url:'/subpkg/goods_list/goods_list?cid='+item3.cat_id
+				})
+			},
+			gotoSearch(){
+				// console.log(123)
+				uni.navigateTo({
+					url:'/subpkg/search/search'
 				})
 			}
 		}
