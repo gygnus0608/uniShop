@@ -1,10 +1,14 @@
 <template>
 	<view>
+<<<<<<< HEAD
 		<view class="goods-list">
 			<view v-for="(goods,index) in goodsList" :key="index" @click="gotoDetail(goods)">
 				<my-goods :goods="goods"></my-goods>
 			</view>
 		</view>
+=======
+		goods_list
+>>>>>>> 335a0d829910d1f1fcf1825bb8cd5232db71cfc6
 	</view>
 </template>
 
@@ -12,6 +16,7 @@
 	export default {
 		data() {
 			return {
+<<<<<<< HEAD
 				queryObj:{
 					query:'',
 					cid:'',
@@ -71,6 +76,10 @@
 			this.goodsList = []
 			// 重新发起数据请求
 			this.getGoodsList(()=>uni.stopPullDownRefresh())
+=======
+				
+			};
+>>>>>>> 335a0d829910d1f1fcf1825bb8cd5232db71cfc6
 		}
 	}
 </script>
