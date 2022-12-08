@@ -29,16 +29,11 @@
                 }
                 ,{
                     "path" : "goods_list/goods_list",
-<<<<<<< HEAD
                     "style" :{
 						"onReachBottomDistance": 150,
 						"enablePullDownRefresh": true,
 						"backgroundColor": "#f8f8f8"
 					}
-=======
-                    "style" :{}
->>>>>>> 335a0d829910d1f1fcf1825bb8cd5232db71cfc6
-                
                 }
                 ,{
                     "path" : "search/search",
@@ -50,11 +45,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-<<<<<<< HEAD
 		"navigationBarTitleText": "优尼商城",
-=======
-		"navigationBarTitleText": "商品优购",
->>>>>>> 335a0d829910d1f1fcf1825bb8cd5232db71cfc6
 		"navigationBarBackgroundColor": "#C00000",
 		"backgroundColor": "#FFFFFF"
 	},
