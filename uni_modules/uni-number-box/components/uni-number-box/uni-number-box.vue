@@ -131,9 +131,10 @@
 			},
 			_onBlur(event) {
 				this.$emit('blur', event)
-				let value = event.detail.value;
-				if (isNaN(value)) {
-					this.inputValue = this.min;
+				// 将用户输入的内容强制转换成整数
+				let value = parseInt(event.detail.value);
+				if (!value) {
+					this.inputValue = 1;
 					return;
 				}
 				value = +value;

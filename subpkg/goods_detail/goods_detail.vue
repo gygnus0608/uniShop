@@ -35,6 +35,8 @@
 </template>
 
 <script>
+	import {mapState,mapMutations,mapGetters} from 'vuex'
+import cart from '../../store/cart';
 	export default {
 		data() {
 			return {
@@ -42,7 +44,6 @@
 				options: [{
 						icon: 'shop',
 						text: '店铺',
-						info: 0
 					}, {
 						icon: 'cart',
 						text: '购物车',
@@ -60,17 +61,24 @@
 				}]
 			};
 		},
+		computed:{
+			...mapState('m_cart',[]),
+			...mapGetters('m_cart',['total'])
+		},
 		onLoad(options) {
 			const goods_id = options.goods_id
 			this.getGoodDetail(goods_id)
+			// console.log(options)
 		},
 		methods:{
+			// 获取m_cart里面的addToCart方法
+			...mapMutations('m_cart',['addToCart']),
 			async getGoodDetail(goods_id){
 				const {data:res} = await uni.$http.get('/api/public/v1/goods/detail',{goods_id})
 				if(res.meta.status !== 200) return uni.$showMsg()
 				res.message.goods_introduce = res.message.goods_introduce.replace(/<img /g, '<img style="display:block;"').replace(/webp/g,'jpg')
 				this.goods_info = res.message
-				console.log(this.goods_info)
+				// console.log(this.goods_info)
 			},
 			preview(i){
 				// 调用uni.previewImage()方法预览图片
@@ -89,8 +97,35 @@
 				}
 			},
 		    buttonClick (e) {
-				console.log(e)
-				this.options[2].info++
+				// console.log(e)
+				if(e.content.text === '加入购物车'){
+					const goods = {
+						// goods_id,goods_name,goods_price,goods_count,goods_small_logo,goods_state
+						goods_id : this.goods_info.goods_id,
+						goods_name:this.goods_info.goods_name,
+						goods_price:this.goods_info.goods_price,
+						goods_count:1,
+						goods_small_logo:this.goods_info.goods_small_logo,
+						goods_state:true
+					}
+					this.addToCart(goods)
+					
+				}
+			},
+			
+		},
+		// 使用普通函数的话，页面首次加载完毕后，不会调用这个监听器
+		// 用handler+immediate的方法可以让页面首次加载完毕就调用监听器
+		watch:{
+			total:{
+				handler(newVal){
+					// 找出含有“购物车”的对象
+					const findResult = this.options.find(x=>x.text === '购物车')
+					if(findResult){
+						findResult.info = newVal
+					}
+				},
+				immediate:true
 			}
 		}
 	}
