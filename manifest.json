@@ -1,6 +1,6 @@
 {
-    "name" : "uniShop",
-    "appid" : "__UNI__A072DA1",
+    "name" : "优尼商城",
+    "appid" : "__UNI__D8958BB",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -54,13 +54,9 @@
         "setting" : {
             "urlCheck" : true,
             "checkSiteMap" : false
-		},
+        },
         "usingComponents" : true,
-		"requiredPrivateInfos": [
-			"getLocation",
-			"chooseLocation",
-			"chooseAddress"
-		 ]
+        "requiredPrivateInfos" : [ "getLocation", "chooseLocation", "chooseAddress" ]
     },
     "mp-alipay" : {
         "usingComponents" : true
